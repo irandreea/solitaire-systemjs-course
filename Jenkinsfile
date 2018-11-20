@@ -1,23 +1,31 @@
 stage 'CI'
 node {
     
-    resolveScm source: [$class: 'GitSCMSource', 
-                        credentialsId: '', 
-                        id: '_', 
-                        remote: 'https://github.com/g0t4/solitaire-systemjs-course', 
-                        traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]],
-                        targets: [branch, 'master']
-
-   // checkout scm
-
+   checkout([$class: 'GitSCM', 
+             branches: [[name: '*/${branch}']], 
+             doGenerateSubmoduleConfigurations: false, 
+             extensions: [ [$class:'CloneOption', 
+                            depth:5, 
+                            noTags:true, 
+                            reference:'', 
+                            shallow:true],
+                          [$class:'RelativeTargetDirectory', 
+                           relativeTargetDir: 'springboot' ]], 
+             submoduleCfg: [], 
+             userRemoteConfigs: [[url: 'https://github.com/irandreea/jenkins2-course-spring-boot.git']]])
     
-    checkout resolveScm(source: [$class: 'GitSCMSource', 
-                        credentialsId: '', 
-                        id: '_', 
-                        remote: 'https://github.com/irandreea/jenkins2-course-spring-boot.git', 
-                        traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait'], [$class: 'RelativeTargetDirectory', relativeTargetDir:'']]] ),
-                       
-                        targets: ['master']
+    checkout([$class: 'GitSCM', 
+             branches: [[name: '*/${branch}']], 
+             doGenerateSubmoduleConfigurations: false, 
+             extensions: [ [$class:'CloneOption', 
+                            depth:5, 
+                            noTags:true, 
+                            reference:'', 
+                            shallow:true],
+                          [$class:'RelativeTargetDirectory', 
+                           relativeTargetDir: 'springboot2' ]], 
+             submoduleCfg: [], 
+             userRemoteConfigs: [[url: 'https://github.com/irandreea/jenkins2-course-spring-boot.git']]])
 
    
 
