@@ -1,5 +1,12 @@
 stage 'CI'
 node {
+    
+    resolveScm source: [$class: 'GitSCMSource', 
+                        credentialsId: '', 
+                        id: '_', 
+                        remote: 'https://github.com/g0t4/solitaire-systemjs-course', 
+                        traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]],
+                        targets: ['jenkins2-course', 'master']
 
     checkout scm
 
