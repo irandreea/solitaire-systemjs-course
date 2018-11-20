@@ -26,38 +26,38 @@ node {
 
     // pull dependencies from npm
     // on windows use: bat 'npm install'
-    sh 'npm install'
+   // sh 'npm install'
 
     // stash code & dependencies to expedite subsequent testing
     // and ensure same code & dependencies are used throughout the pipeline
     // stash is a temporary archive
-    stash name: 'everything', 
-          excludes: 'test-results/**', 
-          includes: '**'
+    //stash name: 'everything', 
+     //     excludes: 'test-results/**', 
+      //    includes: '**'
     
     // test with PhantomJS for "fast" "generic" results
     // on windows use: bat 'npm run test-single-run -- --browsers PhantomJS'
-    sh 'npm run test-single-run -- --browsers PhantomJS'
+   // sh 'npm run test-single-run -- --browsers PhantomJS'
     
     // archive karma test results (karma is configured to export junit xml files)
-    step([$class: 'JUnitResultArchiver', 
-          testResults: 'test-results/**/test-results.xml'])
+  //  step([$class: 'JUnitResultArchiver', 
+    //      testResults: 'test-results/**/test-results.xml'])
           
 }
 
 // demoing a second agent
-node('mac') {
+//node('mac') {
     // on windows use: bat 'dir'
-    sh 'ls'
+ //   sh 'ls'
 
     // on windows use: bat 'del /S /Q *'
-    sh 'rm -rf *'
+  //  sh 'rm -rf *'
 
-    unstash 'everything'
+  //  unstash 'everything'
 
     // on windows use: bat 'dir'
-    sh 'ls'
-}
+  //  sh 'ls'
+//}
 
 //parallel integration testing
 stage 'Browser Testing'
