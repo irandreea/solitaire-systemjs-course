@@ -8,8 +8,8 @@ node {
                         traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]],
                         targets: [branch, 'master']
 
-    checkout scm
-    stash 'everything'
+   // checkout scm
+
     
     resolveScm source: [$class: 'GitSCMSource', 
                         credentialsId: '', 
@@ -19,7 +19,7 @@ node {
                         targets: ['master']
 
     checkout scm
-    unstash 'everything'
+
 
     //git branch: 'jenkins2-course', 
     //    url: 'https://github.com/g0t4/solitaire-systemjs-course'
