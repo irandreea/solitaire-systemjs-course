@@ -6,7 +6,7 @@ node {
                         id: '_', 
                         remote: 'https://github.com/g0t4/solitaire-systemjs-course', 
                         traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]],
-                        targets: ['${branch}', 'master']
+                        targets: ['params.${branch}', 'master']
 
     checkout scm
 
