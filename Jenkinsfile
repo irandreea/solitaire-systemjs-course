@@ -2,7 +2,7 @@ stage 'CI'
 node {
     
    checkout([$class: 'GitSCM', 
-             branches: [[name: '*/${branch}']], 
+             branches: [[name: '${branch}'], [name: 'master']], 
              doGenerateSubmoduleConfigurations: false, 
              extensions: [ [$class:'CloneOption', 
                             depth:5, 
@@ -10,7 +10,8 @@ node {
                             reference:'', 
                             shallow:true],
                           [$class:'RelativeTargetDirectory', 
-                           relativeTargetDir: 'springboot' ]], 
+                           relativeTargetDir: 'springboot' ]
+                          [$class: 'LocalBranch', localBranch: "**"]], 
              submoduleCfg: [], 
              userRemoteConfigs: [[url: 'https://github.com/irandreea/jenkins2-course-spring-boot.git']]])
     
