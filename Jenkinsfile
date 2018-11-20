@@ -11,14 +11,14 @@ node {
    // checkout scm
 
     
-    resolveScm source: [$class: 'GitSCMSource', 
+    checkout resolveScm source: [$class: 'GitSCMSource', 
                         credentialsId: '', 
                         id: '_', 
                         remote: 'https://github.com/irandreea/jenkins2-course-spring-boot.git', 
                         traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]],
                         targets: ['master']
 
-    checkout scm
+   
 
 
     //git branch: 'jenkins2-course', 
