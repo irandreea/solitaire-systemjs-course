@@ -15,7 +15,8 @@ node {
                         credentialsId: '', 
                         id: '_', 
                         remote: 'https://github.com/irandreea/jenkins2-course-spring-boot.git', 
-                        traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]] ),
+                        traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait'], [$class: 'RelativeTargetDirectory', relativeTargetDir:spring-boot]]] ),
+                       
                         targets: ['master']
 
    
