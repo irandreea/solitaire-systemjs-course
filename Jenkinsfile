@@ -1,5 +1,13 @@
 stage 'CI'
 node {
+   
+   resolveScm source: [$class: 'GitSCMSource', 
+                      credentialsId: '', 
+                      id: '_', 
+                      remote: '', 
+                      traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]], 
+       targets: [branch, 'master']
+    
     
    checkout([$class: 'GitSCM', 
              branches: [[name: '*/${branch}']], 
@@ -11,7 +19,7 @@ node {
                             shallow:true],
                           [$class:'RelativeTargetDirectory', 
                            relativeTargetDir: 'springboot' ]
-                          [$class: 'LocalBranch', localBranch: "**"]], 
+                          ], 
              submoduleCfg: [], 
              userRemoteConfigs: [[url: 'https://github.com/irandreea/jenkins2-course-spring-boot.git']]])
     
