@@ -2,7 +2,7 @@ stage 'CI'
 node {
     
    checkout([$class: 'GitSCM', 
-             branches: [[name: '/feature'], [name: 'master']], 
+             branches: [[name: '*/${branch}']], 
              doGenerateSubmoduleConfigurations: false, 
              extensions: [ [$class:'CloneOption', 
                             depth:5, 
