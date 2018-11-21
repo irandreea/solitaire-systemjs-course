@@ -1,43 +1,37 @@
 stage 'CI'
 node {
    
-   resolveScm source: [$class: 'GitSCMSource', 
-                      credentialsId: '', 
-                      id: '_', 
-                      remote: '', 
-                      traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]], 
-       targets: [branch, 'master']
-    
-    
-   checkout([$class: 'GitSCM', 
-             branches: [[name: '*/${branch}']], 
-             doGenerateSubmoduleConfigurations: false, 
-             extensions: [ [$class:'CloneOption', 
-                            depth:5, 
-                            noTags:true, 
-                            reference:'', 
-                            shallow:true],
-                          [$class:'RelativeTargetDirectory', 
-                           relativeTargetDir: 'springboot' ]
-                          ], 
-             submoduleCfg: [], 
-             userRemoteConfigs: [[url: 'https://github.com/irandreea/jenkins2-course-spring-boot.git']]])
-    
-    checkout([$class: 'GitSCM', 
-             branches: [[name: '*/${branch}']], 
-             doGenerateSubmoduleConfigurations: false, 
-             extensions: [ [$class:'CloneOption', 
-                            depth:5, 
-                            noTags:true, 
-                            reference:'', 
-                            shallow:true],
-                          [$class:'RelativeTargetDirectory', 
-                           relativeTargetDir: 'springboot2' ]], 
-             submoduleCfg: [], 
-             userRemoteConfigs: [[url: 'https://github.com/irandreea/jenkins2-course-spring-boot.git']]])
+   dir('ckan') {
+      checkout resolveScm(source: [$class: 'GitSCMSource', 
+                                   credentialsId: '', 
+                                   id: '_', 
+                                   remote: 'https://github.com/ckan/ckan.git', 
+                                   traits: [[$class: 'BranchDiscoveryTrait'], 
+                                            [$class: 'CloneOptionTrait', 
+                                             extension: [depth: 5, 
+                                                         noTags: true, 
+                                                         reference: '', 
+                                                         shallow: true]], 
+                                            [$class: 'LocalBranchTrait']]], 
+                          targets: [branch,'master'])
+   }
+   
+   dir('jenkins2-course') {
+      checkout resolveScm(source: [$class: 'GitSCMSource', 
+                                   credentialsId: '', 
+                                   id: '_', 
+                                   remote: 'https://github.com/irandreea/jenkins2-course-spring-boot.git', 
+                                   traits: [[$class: 'BranchDiscoveryTrait'], 
+                                            [$class: 'CloneOptionTrait', 
+                                             extension: [depth: 5, 
+                                                         noTags: true, 
+                                                         reference: '', 
+                                                         shallow: true]], 
+                                            [$class: 'LocalBranchTrait']]], 
+                          targets: [branch,'master'])
+   }
 
    
-
 
     //git branch: 'jenkins2-course', 
     //    url: 'https://github.com/g0t4/solitaire-systemjs-course'
