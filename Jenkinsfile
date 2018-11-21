@@ -11,8 +11,8 @@ pipeline {
               sh """mkdir ckan
                  cd ckan
               """  
-              def b = resolveScm source: [$class: 'GitSCMSource', credentialsId: '', id: '_', remote: 'https://github.com/ckan/ckan.git', traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]], targets: [branch, 'master']
-              checkout b
+              checkout resolveScm source: [$class: 'GitSCMSource', credentialsId: '', id: '_', remote: 'https://github.com/ckan/ckan.git', traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]], targets: [branch, 'master']
+              
             }
         }
         stage('Static Code Analysis') {
