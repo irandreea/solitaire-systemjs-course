@@ -12,9 +12,10 @@ pipeline {
                 checkout resolveScm ( source: [$class: 'GitSCMSource', credentialsId: '', id: '_', remote: 'https://github.com/ckan/ckan.git', traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]], targets: [branch, 'master'])
               }
                 
-             // dir ('jenkins2-try') {
-             //   checkout resolveScm ( source: [$class: 'GitSCMSource', credentialsId: '', id: '_', remote: 'https://github.com/irandreea/jenkins2-course-spring-boot.git', traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]], targets: [branch, 'master']) 
-             // }
+              dir ('jenkins2-try') {
+                checkout resolveScm ( source: [$class: 'GitSCMSource', credentialsId: '', id: '_', remote: 'https://github.com/irandreea/jenkins2-course-spring-boot.git', traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]], targets: [branch, 'master']) 
+              }
+            }
         }
         stage('Static Code Analysis') {
             steps {
